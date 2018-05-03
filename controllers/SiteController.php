@@ -10,7 +10,7 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\EntryForm;
-use app\models\HuffmanModel;
+use app\models\TreeModel;
 class SiteController extends Controller
 {
     /**
@@ -62,13 +62,9 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        //Yii::import('service.lib.*');
-        $text = "qwerty";
-        $model = new HuffmanModel();
-        $encoded = $model->encode($text);
-
-        return $this->render('index', ['encoded' => $encoded]);
-        //return $this->render('index');
+        $model = new TreeModel();
+        $nav = $model->getMenu();
+        return $this->render('index', ['list' => $nav]);
     }
 
     /**

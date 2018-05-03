@@ -4,17 +4,30 @@
  */
 $this->title = 'My Yii Application';
 use yii\helpers\Html;
-use app\models\HuffmanModel;
+use app\models\TreeModel;
 use yii\widgets\ActiveForm;
 ?>
 <div class="site-index">
     <div class="jumbotron">
-        <h2>Huffman code</h2>
-        <p>Encode = <?php
-
-            var_export($encoded);?><br>
-        </p>
-
+        <h2>List Categories</h2>
+                <h3>
+                    <?php
+                    //Выводим каталог на экран
+                    function get_list(int $id_ref, array $nav){
+                        $tree = '<ul style = "list-style: none">';
+                        foreach ($nav as $item){
+                            if ($item['id_ref'] == $id_ref && $item['id']>0){
+                                $tree .= '<li>'. $item['title'];
+                                $tree .= get_list ($item['id'], $nav);
+                                $tree .= '</li>';
+                            }
+                        }
+                        $tree .= '</ul>';
+                        return $tree;
+                    }
+                    echo get_list(0, $list);
+                    ?>
+                </h3>
     </div>
     <div class="jumbotron">
         <h1>Congratulations!</h1>
