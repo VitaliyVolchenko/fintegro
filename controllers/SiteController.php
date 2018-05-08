@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\HuffmanModel;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -10,7 +11,6 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\EntryForm;
-use app\models\TreeModel;
 class SiteController extends Controller
 {
     /**
@@ -62,9 +62,9 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $model = new TreeModel();
-        $nav = $model->getMenu();
-        return $this->render('index', ['list' => $nav]);
+        $model = new HuffmanModel();
+        $fileSize = $model->getSize();
+       return $this->render('index', ['fileSize' => $fileSize]);
     }
 
     /**

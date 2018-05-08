@@ -6,26 +6,17 @@ $this->title = 'My Yii Application';
 use yii\helpers\Html;
 use app\models\TreeModel;
 use yii\widgets\ActiveForm;
+use app\models\HuffmanModel;
 ?>
 <div class="site-index">
     <div class="jumbotron">
-        <h2>List Categories</h2>
+        <h2>View Huffman Compration</h2>
                 <h3>
                     <?php
-                    //Выводим каталог на экран
-                    function get_list(int $id_ref, array $nav){
-                        $tree = '<ul style = "list-style: none">';
-                        foreach ($nav as $item){
-                            if ($item['id_ref'] == $id_ref && $item['id']>0){
-                                $tree .= '<li>'. $item['title'];
-                                $tree .= get_list ($item['id'], $nav);
-                                $tree .= '</li>';
-                            }
-                        }
-                        $tree .= '</ul>';
-                        return $tree;
-                    }
-                    echo get_list(0, $list);
+                    echo "Size file origin: " . $fileSize['size_org'] . '<br>';
+                    echo "Size file after encode: " . $fileSize['size_enc'] . '<br>';
+                    $compres = ($fileSize['size_enc']*100)/$fileSize['size_org'];
+                    echo "The compression = " . (int)$compres . "%" . '<br>';
                     ?>
                 </h3>
     </div>
